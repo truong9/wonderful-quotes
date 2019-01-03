@@ -1,6 +1,6 @@
-<template lang="html">
+<template>
   <div class="row">
-    <app-quote v-for="quote in quotes">{{ quote }}</app-quote>
+    <app-quote v-for="(quote, index) in quotes" @click.native="deleteQuote(index)">{{ quote }}</app-quote>
   </div>
 </template>
 
@@ -11,9 +11,17 @@
     props: ['quotes'],
     components: {
       appQuote: Quote
-    }
+    },
+    methods: {
+      deleteQuote(index) {
+        this.$emit('quoteDeleted', index);
+      }
+    },
   }
 </script>
 
 <style scoped>
+  div {
+    margin-bottom: 20px;
+  }
 </style>
